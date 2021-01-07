@@ -10,7 +10,7 @@ int main()
     {
         if(x>a[temp])
         {
-            printf("%d",a[temp]);
+            printf("%d ",a[temp]);
         }
     }
 }
