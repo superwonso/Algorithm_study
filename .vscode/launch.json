@@ -5,6 +5,13 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "type": "java",
+            "name": "Launch test",
+            "request": "launch",
+            "mainClass": "test",
+            "projectName": "baekjoon_6649776b"
+        },
+        {
             "name": "Go Debug",
             "type": "go",
             "request": "launch",
