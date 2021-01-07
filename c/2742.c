@@ -3,8 +3,7 @@ int main(void)
 {
     int a;
     scanf("%d",&a);
-    int temp=a;
-    for(temp=a;temp=1;temp--)
+    for(int temp=a; temp>0; temp--)
     {
     printf("%d\n",temp); 
     }
