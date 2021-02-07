@@ -6,7 +6,7 @@
     "configurations": [
         {
             "type": "java",
-            "name": "Launch test",
+            "name": "Java Debug",
             "request": "launch",
             "mainClass": "test",
             "projectName": "baekjoon_6649776b"
