@@ -1,25 +1,22 @@
 #include <stdio.h>
 int main()
 {
-    int a=0;
-    int b,c;
-    int next;
-    int count=0;
-    scanf("%d",&a);
-    while(next==a)
+int num;
+int result;
+int a,b,c,d;
+int count=0;
+scanf("%d",&num);
+result=num;
+while(1)
 {
-    if(a<10) 
-    {
-    next=11*a;
-    count=count+1;
-    }
-    else
-    {
-        b=a%10;
-        c=(a-b)/10;
-        next=b+c;
-        count=count+1;
-    }  
-printf("%d",count);
+    a=num/10;
+    b=num%10;
+    c=(a+b)%10;
+    d=(b*10)+c;
+    num=d;
+    count++;
+    if(d==result) break;
 }
+printf("%d",count);
+return 0;
 }
