@@ -18,5 +18,5 @@ while(1)
     if(d==result) break;
 }
 printf("%d",count);
-return 0;
+return 0; 
 }
