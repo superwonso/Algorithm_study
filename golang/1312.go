@@ -1,3 +1,4 @@
+/*
 package main
 
 import (
@@ -17,4 +18,15 @@ func main() {
 	fmt.Println(i % 10)
 }
 
-//https://www.acmicpc.net/problem/1312
+https://www.acmicpc.net/problem/1312 */
+
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+	a := "hello world"
+	fmt.Println(a)
+}
