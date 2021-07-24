@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-func main() {
+func PrintCombination() {
 	var n, k int
 	fmt.Scanln(&n, &k)
 	fmt.Println(Combination(n, k))
