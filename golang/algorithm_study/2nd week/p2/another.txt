@@ -1,0 +1,34 @@
+// proof to possibility
+/*
+func possibility() {
+	var n, m int
+	fmt.Scanln(&n, &m)
+	var cases [][]int
+	for j:=0; j<n; j++ {
+	for i:=0; i<m; i++ {
+		fmt.Scanln("%d",cases[j][i])
+	}
+}
+var x int = 0
+for k:=0; k<(n/2); k++ {
+	Combination(n-(2*k),2)
+	x+=x
+	}
+var y int = x/factorial(n/2) // only in first case
+}
+
+func factorial(n int) int {
+	if n <= 0 {
+		return 1
+	}
+	return (n * factorial(n-1))
+}
+
+func Permutation(n, k int) int {
+	return factorial(n) / factorial(n-k)
+}
+
+func Combination(n, k int) int {
+	return Permutation(n, k) / factorial(k)
+}
+*/
