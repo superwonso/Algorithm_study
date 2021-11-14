@@ -4,10 +4,11 @@ import (
 	"fmt"
 )
 
-func PrintCombination() {
-	var n, k int
+func Return_Combination() int {
+	var n, k, result int
 	fmt.Scanln(&n, &k)
-	fmt.Println(Combination(n, k))
+	result = Combination(n, k)
+	return result
 }
 
 func factorial(n int) int {
