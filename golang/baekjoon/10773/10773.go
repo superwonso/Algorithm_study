@@ -11,9 +11,9 @@ var stack [100001]int
 
 func main() {
 	var k, result, tmp int
-	fmt.Scanln(&k)
+	r := bufio.NewReader(os.Stdin)
+	fmt.Fscan(r, &k)
 	for i := 0; i < k; i++ {
-		r := bufio.NewReader(os.Stdin)
 		fmt.Fscan(r, &tmp)
 		if tmp == 0 {
 			pop()
@@ -36,3 +36,6 @@ func push(input int) {
 func pop() {
 	top--
 }
+
+/*r := bufio.NewReader(os.Stdin)
+fmt.Fscan(r, &tmp) */
