@@ -10,7 +10,8 @@ var duration [110]int
 
 func main() {
 	var N, M int = 0, 0
-	fmt.Scanln(&N, &M)
+	fmt.Scanln(&N)
+	fmt.Scanln(&M)
 	photo := make([]int, N)
 	for i := 0; i < M; i++ {
 		var x int
@@ -26,7 +27,7 @@ func main() {
 				break
 			}
 		}
-		if !exist {
+		if exist == false {
 			if len(photo) < N {
 				push_back(photo, x)
 			} else {
