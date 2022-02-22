@@ -22,21 +22,12 @@ func main() {
 func prove(a, p int) string {
 	if check_prime(p) == true {
 		return "no"
-	} else if check_prime(p) == false {
-		var power int = 0
-		power = a
-		fmt.Println(power)
-		for i := 1; i < p; i++ {
-			power = power * a
-		}
-		fmt.Println(power)
-		if power%p != a {
-			return "no"
-		} else {
-			return "yes"
-		}
 	} else {
-		return "fail"
+		if mod_pow(a, p, p) == a {
+			return "yes"
+		} else {
+			return "no"
+		}
 	}
 }
 
@@ -53,4 +44,17 @@ func check_prime(p int) bool {
 		}
 	}
 	return true
+}
+
+//Divide and Conquer
+func mod_pow(a, p, m int) int {
+	var result int = 1
+	for p > 0 {
+		if p%2 == 1 {
+			result = result * a % m
+		}
+		a = a * a % m
+		p = p / 2
+	}
+	return result
 }
