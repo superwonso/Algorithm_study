@@ -1,29 +1,28 @@
-#include <iostream>
-#include <vector>
-#include <algorithm>
+#include<iostream>
 
 using namespace std;
 
-int main() {
-    int T;
-    vector<int> res;
-    cin>>T;
-    for(int i=0; i<T; i++){
-        vector<int> nums;
-        long int N;
-        cin>>N;
-        for(int j=0; j<N; j++){
-            scanf("%d",&nums[j]);
+int stock[1000000];
+
+int main(){
+    int i, test_case, T, N;
+    cin>> T;
+    for (test_case = 1; test_case <= T; ++test_case) {
+        scanf("%d", &N);
+        long balance = 0;
+        for (i = 0; i < N; i++){
+            scanf("%d", stock + i);
+        }
+        int max = i - 1;
+        for (i -= 2; i >= 0; --i) {
+            if (stock[i] <= stock[max]){
+                balance += stock[max] - stock[i];
             }
-        for(int j=nums.size()-1; j>0; j--){
-            int MAX=nums[nums.size()-1];
-            if(nums[j]>nums[j-1])
-            {
-                res[i]+=MAX-nums[j];
-            } else {
-                MAX=nums[j];
+            else{
+                max = i;
             }
         }
-    printf("#%d %d",i+1,res[i]);
+        printf("#%d %ld\n", test_case, balance);
     }
-    }
+    return 0;
+}

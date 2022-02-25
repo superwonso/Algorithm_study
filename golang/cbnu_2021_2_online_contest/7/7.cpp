@@ -3,7 +3,7 @@
 #include <string>
 using namespace std;
 
-int main(int argc,char *argv){
+int main(){
     int tc;
     string result[]={"NA","MMYY","YYMM","AMBIGUOUS"};
     int t;
