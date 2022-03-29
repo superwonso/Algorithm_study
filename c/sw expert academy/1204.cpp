@@ -1,29 +1,29 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <memory.h>
 using namespace std;
 
 int main() {
     ios_base::sync_with_stdio(false);
     int t,tc;
-    cin>>tc;
     int check[100];
-    vector<int> v;
-    vector<int> res;
+    check[0]=0;
+    cin>>tc;
     for (t=1; t<=tc; t++) {
         int tcn;
         cin>>tcn;
+        memset(check, 0, sizeof(check));
         for(int i=0; i<1000; i++) {
             int a;
             cin>>a;
-            v.push_back(a);
+           check[a]++;
         }
-        for(int i=0; i<1000; i++) {
-            check[v[i]]++;
+        int now = 0, score = 0;
+        for (int i = 0; i <= 100; i++) {
+            if (now <= check[i]) score = i, now = check[i];
         }
-    res[t]=*max_element(v.begin(),v.end());
-    cout<<"#"<<tcn<<" "<<res[t]<<endl;
-    v.clear();
+        cout << "#" << tcn << " " << score << '\n';
     }
 return 0;
 }
