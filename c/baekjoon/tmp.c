@@ -121,3 +121,4 @@ void to_static_var(){
     printf("%d\n",age_of_jiwon);
     age_of_jiwon++;
 }
+
