@@ -1,8 +1,9 @@
+// https://www.acmicpc.net/problem/11402
 #include <iostream>
 
 using namespace std;
 
-int Combination(int n,int k, int m);
+int Combination(int n,int k, int m); // Using Lucas' thorem
 
 int main(){
     ios_base::sync_with_stdio(false);
@@ -22,7 +23,10 @@ int main(){
     cout << result << endl;
     return 0;
 }
-
+/* 
+Lucas' theorem : mCn = Pi from x=0 to k, mxCnx
+https://en.wikipedia.org/wiki/Lucas%27s_theorem
+*/
 int Combination(int n, int k, int m){
     int a = 1; 
     int b = 1;
