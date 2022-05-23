@@ -18,21 +18,21 @@ int check_BST_util(node* root, int min, int max);
 
 int main() {
     node *example1=NULL; // non BST
+    example1 = insert_node(example1, 3);
+    example1 = insert_node(example1, 2);
     example1 = insert_node(example1, 5);
     example1 = insert_node(example1, 2);
-    example1 = insert_node(example1, 4);
-    example1 = insert_node(example1, 6);
-    example1 = insert_node(example1, 3);
-    example1 = insert_node(example1, 1);
+    example1 = insert_node(example1, 2);
     
     node *example2=NULL; // BST
-    example2 = insert_node(example2, 1);
-    example2 = insert_node(example2, 2);
-    example2 = insert_node(example2, 3);
-    example2 = insert_node(example2, 4);
+    example2 = insert_node(example2, 10);
     example2 = insert_node(example2, 5);
+    example2 = insert_node(example2, 17);
+    example2 = insert_node(example2, 1);
     example2 = insert_node(example2, 6);
-    example2 = insert_node(example2, 7);
+    example2 = insert_node(example2, 14);
+    example2 = insert_node(example2, 21);
+    
     printf("%d\n",example1->data);
     printf("%d\n",example2->data);
     
