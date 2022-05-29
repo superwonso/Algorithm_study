@@ -1,3 +1,4 @@
+// O(n^2) , Fail
 package main
 
 import (
@@ -8,21 +9,20 @@ func main() {
 	var N int
 	fmt.Scanln(&N)
 	A := make([]int, N)
-
-	for i := 0; i < N; i++ {
-		fmt.Scanln(&A[i])
-	}
-
 	result := make([]int, N)
+	for i := 0; i < N; i++ {
+		fmt.Scanf("%d", &A[i])
+	}
+	result = A
 	for x := 0; x < N; x++ {
-		for i := x; i < len(A)-1; i++ {
-			result[x] = A[i]
-			if A[i] < A[i+1] {
-				result[x] = A[i]
+		for y := x; y < N; y++ {
+			if result[x] < A[y] {
+				result[x] = A[y]
+				fmt.Scanln(result[x])
 			}
-			if result[x] == A[i] {
-				result[x] = -1
-			}
+		}
+		if result[x] == A[x] {
+			result[x] = -1
 		}
 	}
 	fmt.Println(result)
