@@ -52,7 +52,7 @@ void inc_insertion_sort(int list[], int from, int to, int gap){
     // 현재 정렬된 배열은 i-gap까지이므로 i-gap번째부터 역순으로 조사한다.
     // j 값은 from 이상이어야 하고
     // key 값보다 정렬된 배열에 있는 값이 크면 j번째를 j+gap번째로 이동
-    for(j=i-gap; j>=from && list[j]>key; j=j-gap){
+    for(j=i-gap; j>=from && list[j]>key; j-=gap){
       list[j+gap] = list[j]; // 레코드를 gap만큼 오른쪽으로 이동
     }
     list[j+gap] = key;
@@ -63,7 +63,7 @@ void inc_insertion_sort(int list[], int from, int to, int gap){
 // gap만큼 떨어진 요소들을 삽입 정렬
 void shell_sort(int list[], int n){
   int i, gap;
-  for(gap=n/2; gap>0; gap=gap/2){
+  for(gap=n/2; gap>0; gap/=2){
     if((gap%2) == 0){
       gap++; // gap을 홀수로 만든다.
     }
