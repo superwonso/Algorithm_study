@@ -8,8 +8,15 @@ func main() {
 	fmt.Scanln(&B)
 	fmt.Scanln(&C)
 	tmp := A * B * C
-	var result = make([]int, 9)
-	for (i:=0; i<10; i++) {
-		
+	calc := make([]int, 10)
+	for true {
+		calc[tmp%10]++
+		tmp /= 10
+		if tmp == 0 {
+			break
+		}
+	}
+	for i := 0; i < len(calc); i++ {
+		fmt.Println(calc[i])
 	}
 }
