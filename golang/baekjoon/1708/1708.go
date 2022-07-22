@@ -1,9 +1,9 @@
 package main
 
-// O(n^3) 이므로 실패..
-
 import (
+	"bufio"
 	"fmt"
+	"os"
 	"sort"
 	"sync"
 )
@@ -178,10 +178,11 @@ func (s indexSorter) Len() int {
 }
 func main() {
 	var N int
-	fmt.Scanf("%d", &N)
+	r := bufio.NewReader(os.Stdin)
+	fmt.Fscanf(r, "%d", &N)
 	points := make([][2]float64, N+1)
 	for i := 0; i <= N; i++ {
-		fmt.Scanln(&points[i][0], &points[i][1])
+		fmt.Fscanln(r, &points[i][0], &points[i][1])
 	}
 	convexHull := New(coordinates(points))
 	fmt.Println(convexHull.Len())
