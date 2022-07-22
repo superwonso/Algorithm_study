@@ -1,4 +1,3 @@
-//Not Solved
 package main
 
 import (
