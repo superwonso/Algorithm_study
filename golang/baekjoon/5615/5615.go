@@ -1,15 +1,21 @@
 package main
 
-import "fmt"
+import (
+	"bufio"
+	"fmt"
+	"os"
+)
+
+var r = bufio.NewReader(os.Stdin)
 
 func main() {
 	var n, cnt int64 = 0, 0
-	fmt.Scan(&n)
-	for n > 0 {
-		n--
+	fmt.Fscan(r, &n)
+	var i int64 = 0
+	for i = 0; i < n; i++ {
 		var s int64
-		fmt.Scan(&s)
-		if isPrime(2*s + 1) {
+		fmt.Fscan(r, &s)
+		if isPrime((2 * s) + 1) {
 			cnt++
 		}
 	}
@@ -30,19 +36,20 @@ func power(x, y, p int64) int64 {
 }
 
 func miller_rabin(n, a int64) bool {
-	r := 0
-	d := n - 1
-	for d%2 == 0 {
-		r += 1
-		d /= 2
-	}
-	x := power(a, d, n)
-	if x == 1 || x == n-1 {
+	if n%a == 0 {
 		return true
 	}
-	for i := 0; i < r-1; i++ {
-		x = power(x, 2, n)
-		if x == n-1 {
+	var d int64 = n - 1
+	for d%2 == 0 {
+		d /= 2
+	}
+	var temp int64 = power(a, d, n)
+	if temp == 1 || temp == n-1 {
+		return true
+	}
+	for d*2 < n-1 {
+		d *= 2
+		if power(a, d, n) == n-1 {
 			return true
 		}
 	}
@@ -50,25 +57,13 @@ func miller_rabin(n, a int64) bool {
 }
 
 func isPrime(n int64) bool {
-	var test_set = [5]int64{2, 3, 5, 7, 11}
-	if n <= 1 {
-		return false
-	}
-	if n == 2 || n == 3 {
-		return true
-	}
-	if n%2 == 0 {
-		return false
-	}
+	var test_set = []int64{5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41}
 	for i := 0; i < len(test_set); i++ {
-		var a int64 = test_set[i]
-		if n == a {
+		if n == test_set[i] {
 			return true
 		}
-		if !miller_rabin(n, a) {
+		if !miller_rabin(n, test_set[i]) {
 			return false
-		} else if miller_rabin(n, a) == true {
-			return true
 		}
 	}
 	return true
