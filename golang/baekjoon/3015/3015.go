@@ -2,7 +2,7 @@ package main
 
 import (
 	"bufio"
-	"container/list" // external package
+	"container/list" // stdlib
 	"fmt"
 	"os"
 )
@@ -31,18 +31,17 @@ func (s *Stack) IsEmpty() bool {
 	return s.v.Len() == 0
 }
 
+var r = bufio.NewReader(os.Stdin)
+
 func main() {
-	r := bufio.NewReader(os.Stdin)
 	s_1 := NewStack()
 	s_2 := NewStack()
 	var n int
-	fmt.Println("Enter the number of people:")
 	fmt.Fscanf(r, "%d", &n)
 	var height int
 	var ans int
-	fmt.Println("Enter the weight of each person:")
 	for i := 0; i < n; i++ {
-		fmt.Fscanf(r, "%d", &height)
+		fmt.Fscan(r, &height)
 		for !s_1.IsEmpty() && !s_2.IsEmpty() && height > s_1.v.Back().Value.(int) {
 			ans += s_2.v.Back().Value.(int)
 			s_1.Pop()
@@ -69,5 +68,5 @@ func main() {
 			}
 		}
 	}
-	fmt.Println("The pair of that you can see : ", ans)
+	fmt.Println(ans)
 }
