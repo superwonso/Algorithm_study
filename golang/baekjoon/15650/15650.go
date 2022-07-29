@@ -1,35 +1,38 @@
 package main
 
-// Solved Not Yet
-// Impleted M=1 only
 import (
+	"bufio"
 	"fmt"
-	"math/rand"
-	"sort"
+	"os"
 )
 
-func main() {
-	var N, M int
-	fmt.Scan(&N, &M)
-	result := make([]int, M)
+var r = bufio.NewReader(os.Stdin)
+var w = bufio.NewWriter(os.Stdout)
 
-	result[0] = rand.Intn(N-1) + 1
-	for i := 1; i < M-1; i++ {
-		result[i] = rand.Intn(N-1) + 1
-		if check_overlap(result[i], result[i-1]) {
-			i--
-		}
-	}
-	sort.Sort(sort.IntSlice(result))
-	println(result)
-	for i := 0; i < M; i++ {
-		fmt.Println(result[i])
-	}
+func main() {
+	var n, m int
+	fmt.Fscanln(r, &n, &m)
+	var visited = make([]bool, n+1)
+	var result = make([]int, m+1)
+	sequence(visited, result, 0, n, m)
+	defer w.Flush()
 }
 
-func check_overlap(a, b int) bool {
-	if a == b {
-		return true
+func sequence(visited []bool, result []int, index, n, m int) {
+	if index == m {
+		for i := 0; i < m; i++ {
+			fmt.Fprintf(w, "%d ", result[i])
+		}
+		fmt.Fprint(w, "\n")
+		return
 	}
-	return false
+	for i := 1; i < n+1; i++ {
+		if visited[i] || index > 0 && result[index-1] > i {
+			continue
+		}
+		visited[i] = true
+		result[index] = i
+		sequence(visited, result, index+1, n, m)
+		visited[i] = false
+	}
 }
