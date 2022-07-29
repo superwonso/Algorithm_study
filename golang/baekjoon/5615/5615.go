@@ -67,6 +67,8 @@ func isPrime(n int64) bool {
 		}
 		if !miller_rabin(n, a) {
 			return false
+		} else if miller_rabin(n, a) == true {
+			return true
 		}
 	}
 	return true
