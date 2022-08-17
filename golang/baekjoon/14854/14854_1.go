@@ -9,8 +9,8 @@ import (
 	"os"
 )
 
-var factorial [][]int
-var inverse [][]int
+var factorial [][]int // factorial[m][n] = (n!)%m
+var inverse [][]int   // inverse[m][n] = (inverse of n!) %m
 var p_adic_factorial [][]int
 var p_adic_inverse [][]int
 var n_list []int = []int{27, 11, 13, 37}
