@@ -197,7 +197,6 @@ func select_mod_prime_power(n, m, p, q int) int {
 
 func get_crt_root(a_list, n_list []int) int {
 	n_mul := reduce(Mul, n_list)
-	//in Python3, the following line is "root_list = (a * n_mul // n * (n_mul // n % a) for a, n in zip(a_list, n_list))"
 	root_list := Map2(a_list, n_list, func(a, n int) int { return a * n_mul / n * (n_mul / n % a) })
 	var res_tmp int
 	for i := 0; i < len(root_list); i++ {
