@@ -23,7 +23,9 @@ func main() {
 	for i := 0; i < t; i++ {
 		var n, k int
 		fmt.Fscan(r, &n, &k)
-		a_list := Map3([]int{select_mod_prime(n, k, 3), select_mod_prime(n, k, 11), select_mod_prime(n, k, 13), select_mod_prime(n, k, 37)}, n_list, []int{3, 1, 1, 1}, func(a, b, c int) int { return a * int(math.Pow(float64(b), float64(c))) })
+		a_list := Map3([]int{select_mod_prime(n, k, 3), select_mod_prime(n, k, 11), select_mod_prime(n, k, 13), select_mod_prime(n, k, 37)}, n_list, []int{3, 1, 1, 1}, func(a, b, c int) int {
+			return a * int(math.Pow(float64(b), float64(c)))
+		})
 		fmt.Println(get_crt_root(a_list, n_list))
 	}
 
