@@ -1,6 +1,6 @@
 package main
 
-// Not working yet (need to malloc)
+// Not working yet
 
 import (
 	"bufio"
@@ -118,7 +118,7 @@ func select_mod_prime_power(n, m, p, q int) int {
 	var e0, eq1 int
 	carry_out := func(m_ex, r_ex []int, d int) (int, int) {
 		var has_carry []int
-		prev_carry := 0
+		var prev_carry int
 		for idx := 0; idx < d+1; idx++ {
 			value := m_ex[idx] + r_ex[idx] + prev_carry
 			if value >= p {
