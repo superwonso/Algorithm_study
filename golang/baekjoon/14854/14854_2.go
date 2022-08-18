@@ -7,20 +7,21 @@ import (
 	"os"
 )
 
-var div = 142857
 var r = bufio.NewReader(os.Stdin)
 
 func main() {
 	var t int
+	D := 142857
 	fmt.Fscan(r, &t)
 	for i := 0; i < t; i++ {
 		var n, r1 int
 		fmt.Fscan(r, &n, &r1)
 		a := comb_pe(n, r1, 3, 3)
-		/*b := comb_pe(n, r1, 11, 1)
+		b := comb_pe(n, r1, 11, 1)
 		c := comb_pe(n, r1, 13, 1)
-		d := comb_pe(n, r1, 37, 1)*/
-		fmt.Println(a)
+		d := comb_pe(n, r1, 37, 1)
+		fmt.Println((a*137566)%, b, c, d)
+		fmt.Println()
 	}
 }
 
