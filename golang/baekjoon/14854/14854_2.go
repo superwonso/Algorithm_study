@@ -11,6 +11,7 @@ var r = bufio.NewReader(os.Stdin)
 
 func main() {
 	var t int
+	var result []int
 	D := 142857
 	fmt.Fscan(r, &t)
 	for i := 0; i < t; i++ {
@@ -20,8 +21,13 @@ func main() {
 		b := comb_pe(n, r1, 11, 1)
 		c := comb_pe(n, r1, 13, 1)
 		d := comb_pe(n, r1, 37, 1)
-		fmt.Println((a*137566)%, b, c, d)
-		fmt.Println()
+		fmt.Println(a, b, c, d)
+		tmpr := ((((a * 137566) % D) + ((b * 103896) % D) + ((c * 109890) % D) + (d * 77220 % D)) % D)
+		fmt.Println(a)
+		result = append(result, tmpr%D)
+	}
+	for i := 0; i < t; i++ {
+		fmt.Println(result[i])
 	}
 }
 
@@ -29,10 +35,10 @@ func precom(p, e int) []int {
 	pe := int(math.Pow(float64(p), float64(e)))
 	var val []int = []int{1}
 	for idx := 1; idx < pe; idx++ {
-		if idx%p == 0 {
-			val = append(val, val[idx-1])
+		if idx%p == 1 {
+			val = append(val, val[len(val)-1]*idx)
 		} else {
-			val = append(val, val[idx-1]*idx%pe)
+			val = append(val, val[len(val)-1])
 		}
 	}
 	return val
@@ -42,37 +48,18 @@ func mod_pow(c, n, d int) int {
 	var res int = 1
 	for n > 0 {
 		if n&1 == 1 {
-			res = res * c % d
+			res *= c % d
 		}
-		c = c * c % d
+		c *= c % d
 		n >>= 1
 	}
 	return res
 }
 
-func fact_n_pe(n, p, e int) (int, int) {
-	val := precom(p, e)
-	pe := int(math.Pow(float64(p), float64(e)))
-
-	return doo(n, p, pe, val)
-}
-
-func doo(n, p, pe int, val []int) (int, int) {
-	if n < p {
-		return 0, val[n]
-	}
-	t := n / p
-	nt, nm := doo(t, p, pe, val)
-	tp := t + nt
-	kp, rp := divmod(n, pe)
-	m := nm * mod_pow(val[pe-1], kp, pe) % pe * val[rp] % pe
-	return tp, m
-}
-
 func divmod(numerator, denominator int) (quotient, remainder int) {
 	quotient = numerator / denominator
 	remainder = numerator % denominator
-	return
+	return quotient, remainder
 }
 
 func comb(n, k, p int) int {
@@ -135,4 +122,33 @@ func comb_pe(n, k, p, e int) int {
 		}
 	}
 	return int(math.Pow(float64(p), float64(t))) * nm * i % pe
+}
+
+func doo(n, p, pe int, val []int) (int, int) {
+	if n < p {
+		return 0, val[n]
+	}
+	t := n / p
+	nt, nm := doo(t, p, pe, val)
+	tp := t + nt
+	kp, rp := divmod(n, pe)
+	m := nm * mod_pow(val[pe-1], kp, pe) % pe * val[rp] % pe
+	return tp, m
+}
+
+func fact_n_pe(n, p, e int) (int, int) {
+	val := precom(p, e)
+	pe := int(math.Pow(float64(p), float64(e)))
+	do := func(n int) (int, int) {
+		if n < p {
+			return 0, 0
+		}
+		t := n / p
+		nt, nm := doo(t, p, pe, val)
+		tp := t + nt
+		kp, rp := divmod(n, pe)
+		m := nm * mod_pow(val[pe-1], kp, pe) % pe * val[rp] % pe
+		return tp, m
+	}
+	return do(n)
 }

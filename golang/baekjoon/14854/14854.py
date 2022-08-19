@@ -1,6 +1,4 @@
-import sys
-input = sys.stdin.readline
-
+from sys import stdin, stdout
 
 def precompute(p, e):
     pe = p**e
@@ -26,7 +24,6 @@ def modpow(c, n, d):
 def fact_n_pe(n, p, e):
     val = precompute(p, e)
     pe = p**e
-
     def do(n):
         if n < p:
             return (0, val[n])
@@ -65,7 +62,6 @@ def lucas(n, k, p):
         k //= p
     while len(ni) > len(ki):
         ki.append(0)
-
     ret = 1
     for i in range(len(ni)):
         ret = ret*comb(ni[i], ki[i], p) % p
@@ -86,22 +82,28 @@ def comb_pe(n, k, p, e):
     for i in range(pe):
         if nkm * km * i % pe == 1:
             break
-
+            
     return (p**t)*nm*i % pe
 
+########################################################
+# main
 
 D = 142857
-T = int(input())
-
 result = []
 
+T = int(stdin.readline())
 for _ in range(T):
-    n, r = map(int, input().split())
+    n, r = map(int, stdin.readline().split())
     a = comb_pe(n, r, 3, 3)
     b = comb_pe(n, r, 11, 1)
     c = comb_pe(n, r, 13, 1)
     d = comb_pe(n, r, 37, 1)
     result.append((a*137566 % D + b*103896 % D + c*109890 % D + d*77220 % D) % D)
 
-for j in range (T):
-    sys.stdout.write(str(result[j]) + '\n')
+i = 0
+s  = ""
+for i in range(len(result)):
+    s += (str(result[i]) + '\n')
+stdout.write(s)
+stdout.flush()
+
