@@ -1,28 +1,30 @@
 package main
 
-import "fmt"
+import (
+	"bufio"
+	"fmt"
+	"os"
+)
+
+var r = bufio.NewReader(os.Stdin)
 
 func main() {
-	var sugar int
-	var vinyl_5 int = 0
-	var vinyl_3 int = 0
-	fmt.Scanln(&sugar)
+	var N, v1, v2, result int = 0, 3, 5, 0
+	fmt.Fscan(r, &N)
 	for true {
-		if sugar-5 > 0 {
-			sugar -= 5
-			vinyl_5++
-		} else if sugar-3 > 0 {
-			sugar -= 3
-			vinyl_3++
-		}
-		if sugar-5 < 0 && sugar-3 < 0 {
+		if N%v2 != 0 {
+			if N < v1 {
+				result = -1
+				break
+			}
+			N -= v1
+			result++
+		} else {
 			break
 		}
 	}
-	if sugar != 0 {
-		fmt.Println("-1")
-	} else {
-		fmt.Println(vinyl_3 + vinyl_5)
+	if result != -1 {
+		result += N / v2
 	}
-
+	fmt.Println(result)
 }
