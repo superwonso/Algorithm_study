@@ -1,4 +1,5 @@
-//Solved Not Yet
+// Solved Not Yet
+// Overflow
 package main
 
 import (
@@ -9,9 +10,9 @@ import (
 )
 
 func main() {
-	var n int
+	var n int64
 	fmt.Scanf("%d", &n)
-	var res []int
+	var res []int64
 	for n > 1 {
 		divisior := pollard_rho(n)
 		res = append(res, divisior)
@@ -25,8 +26,8 @@ func main() {
 	}
 }
 
-func power(x, y, p int) int {
-	res := 1
+func power(x, y, p int64) int64 {
+	var res int64 = 1
 	x = x % p
 	for y > 0 {
 		if y&1 == 1 {
@@ -38,8 +39,8 @@ func power(x, y, p int) int {
 	return res
 }
 
-func gcd(a, b int) int {
-	var r int
+func gcd(a, b int64) int64 {
+	var r int64
 	if a < b {
 		a, b = b, a
 	}
@@ -51,7 +52,7 @@ func gcd(a, b int) int {
 	return a
 }
 
-func miller_rabin(n, a int) bool {
+func miller_rabin(n, a int64) bool {
 	r := 0
 	d := n - 1
 	for d%2 == 0 {
@@ -71,8 +72,8 @@ func miller_rabin(n, a int) bool {
 	return false
 }
 
-func isPrime(n int) bool {
-	var test_set = []int{2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41}
+func isPrime(n int64) bool {
+	var test_set = []int64{2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41}
 	if n == 1 {
 		return false
 	}
@@ -82,7 +83,8 @@ func isPrime(n int) bool {
 	if n%2 == 0 {
 		return false
 	}
-	for i := 0; i < len(test_set); i++ {
+	var i int64 = 0
+	for i = 0; i < int64(len(test_set)); i++ {
 		if n == i {
 			return true
 		} else if miller_rabin(n, i) {
@@ -92,7 +94,7 @@ func isPrime(n int) bool {
 	return true
 }
 
-func pollard_rho(n int) int {
+func pollard_rho(n int64) int64 {
 	if isPrime(n) {
 		return n
 	}
@@ -102,15 +104,15 @@ func pollard_rho(n int) int {
 	if n%2 == 0 {
 		return 2
 	}
-	x := rand.Intn(n-2) + 2
+	x := int64(rand.Intn(int(n-2))) + 2
 	y := x
-	c := rand.Intn(n-1) + 1
-	d := 1
+	c := int64(rand.Intn(int(n-1))) + 1
+	var d int64 = 1
 	for d == 1 {
-		x = ((int((math.Pow(float64(x), 2))) % n) + c + n) % n
-		y = ((int((math.Pow(float64(y), 2))) % n) + c + n) % n
-		y = ((int((math.Pow(float64(y), 2))) % n) + c + n) % n
-		d = gcd(int(math.Abs(float64(x-y))), n)
+		x = ((int64((math.Pow(float64(x), 2))) % n) + c + n) % n
+		y = ((int64((math.Pow(float64(y), 2))) % n) + c + n) % n
+		y = ((int64((math.Pow(float64(y), 2))) % n) + c + n) % n
+		d = gcd(int64(math.Abs(float64(x-y))), n)
 		if d == n {
 			return pollard_rho(n)
 		}
