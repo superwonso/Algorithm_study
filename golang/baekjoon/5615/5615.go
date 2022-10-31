@@ -12,14 +12,16 @@ func main() {
 	var n, cnt int64 = 0, 0
 	fmt.Fscan(r, &n)
 	var i int64 = 0
-	for i = 0; i < n; i++ {
+	for i = 1; i <= n; i++ {
 		var s int64
 		fmt.Fscan(r, &s)
 		if isPrime((2 * s) + 1) {
 			cnt++
 		}
 	}
-	fmt.Println(cnt)
+	if cnt > 0 {
+		fmt.Println(cnt)
+	}
 }
 
 func power(x, y, p int64) int64 {
@@ -57,7 +59,7 @@ func miller_rabin(n, a int64) bool {
 }
 
 func isPrime(n int64) bool {
-	var test_set = []int64{5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41}
+	var test_set = []int64{2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97}
 	for i := 0; i < len(test_set); i++ {
 		if n == test_set[i] {
 			return true
