@@ -4,11 +4,23 @@ import numpy as np
 
 A=1; g=3
 
-# Sampling rate 1000 hz / second
-t = np.linspace(0, 50, 1000, endpoint=True)
+# Define the rect function
+def rect(x):
+    y=x
+    for i in range(len(x)):
+        if np.abs(x[i]) < 0.5:
+            y[i] = 1
+        elif np.abs(x[i]) == 0.5:
+            y[i] = 0.5
+        else:
+            y[i] = 0
+    return y
+
+# Sampling rate 60 hz / second
+t = np.linspace(0, 50, 60, endpoint=True)
 
 # Plot the square wave signal
-plot.plot(t, signal.square(t/g))
+plot.plot(t, A*rect(t/g))
 
 # Give a title for the square wave plot
 plot.title('Sqaure wave')
