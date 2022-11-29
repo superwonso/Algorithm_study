@@ -12,7 +12,7 @@ var r = bufio.NewReader(os.Stdin)
 func main() {
 	var t int
 	var result []int
-	D := 142857
+	var D int = 142857
 	fmt.Fscan(r, &t)
 	for i := 0; i < t; i++ {
 		var n, r1 int
@@ -21,9 +21,12 @@ func main() {
 		b := comb_pe(n, r1, 11, 1)
 		c := comb_pe(n, r1, 13, 1)
 		d := comb_pe(n, r1, 37, 1)
-		fmt.Println(a, b, c, d)
+		//fmt.Println(a, b, c, d)
 		tmpr := ((((a * 137566) % D) + ((b * 103896) % D) + ((c * 109890) % D) + (d * 77220 % D)) % D)
-		fmt.Println(a)
+		fmt.Println(" ")
+		fmt.Println(tmpr)
+		fmt.Println(" ")
+		//fmt.Println(a)
 		result = append(result, tmpr%D)
 	}
 	for i := 0; i < t; i++ {
@@ -98,7 +101,7 @@ func lucas(n, k, p int) int {
 	}
 	ret := 1
 	for i := 0; i < len(ni); i++ {
-		ret *= comb(ni[i], ki[i], p) % p
+		ret = (ret * comb(ni[i], ki[i], p)) % p
 	}
 	return ret
 }
@@ -117,11 +120,11 @@ func comb_pe(n, k, p, e int) int {
 	}
 	var i int
 	for i = 0; i < pe; i++ {
-		if nkm*km*i%pe == 1 {
+		if (nkm*km*i)%pe == 1 {
 			break
 		}
 	}
-	return int(math.Pow(float64(p), float64(t))) * nm * i % pe
+	return (int(math.Pow(float64(p), float64(t))) * nm * i) % pe
 }
 
 func doo(n, p, pe int, val []int) (int, int) {
@@ -132,7 +135,7 @@ func doo(n, p, pe int, val []int) (int, int) {
 	nt, nm := doo(t, p, pe, val)
 	tp := t + nt
 	kp, rp := divmod(n, pe)
-	m := nm * mod_pow(val[pe-1], kp, pe) % pe * val[rp] % pe
+	m := ((nm * mod_pow(val[pe-1], kp, pe) % pe) * val[rp]) % pe
 	return tp, m
 }
 
@@ -147,7 +150,7 @@ func fact_n_pe(n, p, e int) (int, int) {
 		nt, nm := doo(t, p, pe, val)
 		tp := t + nt
 		kp, rp := divmod(n, pe)
-		m := nm * mod_pow(val[pe-1], kp, pe) % pe * val[rp] % pe
+		m := (((nm * mod_pow(val[pe-1], kp, pe)) % pe) * val[rp]) % pe
 		return tp, m
 	}
 	return do(n)
