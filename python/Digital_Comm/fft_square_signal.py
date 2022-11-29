@@ -12,7 +12,7 @@ t = np.linspace(0, 20, 1000, endpoint=True)
 y_tmp = signal.square(t/g)
 fft_y = np.fft.fft(y_tmp)
 
-# Plot the square wave signal
+# Plot the fft square wave signal
 plot.plot(t, fft_y)
 
 # Give x axis label for the square wave plot
