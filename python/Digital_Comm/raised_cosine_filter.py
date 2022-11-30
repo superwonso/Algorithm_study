@@ -1,14 +1,14 @@
 import matplotlib.pyplot as plot
 import numpy as np
 
-r = 0.5 # roll-off factor , r = 0, 0.5, 1
+r = 0 # roll-off factor , r = 0, 0.5, 1
 W_0 = 0.5; f_delta = r*W_0 # normalized frequency
 
 # Define the raised cosine function
 # P(f)= 1 (abs(f)<=W_0 - f_delta) , (1+cos(pi*abs(f)-f_1/2f_delta))/2 (W_0-f_delta<abs(f)<=W_0+f_delta) , 0 (abs(f)>W_0+f_delta)
 def raised_cosine(f, W_0, f_delta):
     y = np.zeros(len(f))
-    if r == 0: 
+    if r == 1: 
         return np.sinc(f)
     for i in range(len(f)):
         if np.abs(f[i]) <= W_0 - f_delta:
