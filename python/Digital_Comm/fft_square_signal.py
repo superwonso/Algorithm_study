@@ -5,7 +5,7 @@ import numpy as np
 A=1; g=1
 
 # Sampling rate 1000 hz / second
-t = np.linspace(0, 20, 1000, endpoint=True)
+t = np.linspace(-10, 10, 1000, endpoint=True)
 
 # Calculate the FFT of the square wave signal
 y_tmp = signal.square(t/g)
@@ -25,7 +25,7 @@ plot.grid(True, which='both')
 plot.axhline(y=0, color='k')
 
 # Set the max and min values for y axis
-plot.ylim(-2, 2)
+plot.ylim(-6, 6)
 
 # Display the square wave drawn
 plot.show()
