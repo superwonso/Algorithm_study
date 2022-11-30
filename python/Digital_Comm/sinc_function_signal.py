@@ -3,12 +3,12 @@ import numpy as np
 
 T_b=0.2
 
-# Sampling rate 1000 hz / second
-t = np.linspace(-1, 1.6, 1000, endpoint=True)
-
 # Define the p(t) fuction
 def p(t):
     return np.sinc(t/(T_b*np.pi))
+    
+# Sampling rate 1000 hz / second
+t = np.linspace(-1, 1.6, 1000, endpoint=True)
     
 # Plot the square wave signal
 plot.plot(t, p(t)+(0.8*p(t-T_b))+(1.2*p(t-2*T_b))+(0.3*p(t-3*T_b)))
