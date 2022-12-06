@@ -6,8 +6,8 @@ A=1
 # Sampling rate 1000 hz / second
 w = np.linspace(-20, 20, 1000, endpoint=True)
 
-# Plot the square wave signal
-plot.plot(w, np.sinc(w/(2*np.pi))*A)
+# Plot the fft-square wave signal
+plot.plot(w, np.sinc(w/(2*np.pi))*A) # np.fft.fft(A*signal.square(t/g))
 
 # Give a title for the square wave plot
 plot.title('Sqaure wave')
