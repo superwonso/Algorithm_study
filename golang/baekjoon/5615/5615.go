@@ -19,15 +19,13 @@ func main() {
 			cnt++
 		}
 	}
-	if cnt > 0 {
-		fmt.Println(cnt)
-	}
+	fmt.Println(cnt)
 }
 
 func power(x, y, p int64) int64 {
 	var res int64 = 1
-	x = x % p
-	for y > 0 {
+	//x = x % p
+	for y != 0 {
 		if y&1 == 1 {
 			res = (res * x) % p
 		}
@@ -38,32 +36,24 @@ func power(x, y, p int64) int64 {
 }
 
 func miller_rabin(n, a int64) bool {
-	if n%a == 0 {
+	if a%n == 0 {
 		return true
 	}
 	var d int64 = n - 1
 	for d%2 == 0 {
-		d /= 2
-	}
-	var temp int64 = power(a, d, n)
-	if temp == 1 || temp == n-1 {
-		return true
-	}
-	for d*2 < n-1 {
-		d *= 2
 		if power(a, d, n) == n-1 {
 			return true
 		}
+		d /= 2
 	}
-	return false
+	var temp int64 = power(a, d, n)
+	return temp == 1 || temp == n-1
 }
 
+var test_set = []int64{2, 7, 61}
+
 func isPrime(n int64) bool {
-	var test_set = []int64{2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97}
 	for i := 0; i < len(test_set); i++ {
-		if n == test_set[i] {
-			return true
-		}
 		if !miller_rabin(n, test_set[i]) {
 			return false
 		}
