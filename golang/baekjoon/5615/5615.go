@@ -25,6 +25,9 @@ func main() {
 		tmp.Add(tmp, tmp)
 		tmp.Add(tmp, tmp2)
 
+		// about ProbablyPrime function... https://golang.org/pkg/math/big/#Int.ProbablyPrime
+		// ProbablyPrime is 100% accurate for inputs less than 2^64, for larger inputs it is accurate (1 - 1/4^n) when set function as x.ProbablyPrime(n).
+		// If n==0, Up to Go 1.8, ProbablyPrime(0) is apply only a Baillie-PSW primality test.
 		if tmp.ProbablyPrime(0) {
 			cnt++
 		}
