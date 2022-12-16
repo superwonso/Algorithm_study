@@ -9,13 +9,14 @@ import (
 	"os"
 )
 
-var factorial [][]int // factorial[m][n] = (n!)%m
-var inverse [][]int   // inverse[m][n] = (inverse of n!) %m
-var p_adic_factorial [][]int
-var p_adic_inverse [][]int
-var n_list []int = []int{27, 11, 13, 37}
-
-var r = bufio.NewReader(os.Stdin)
+var (
+	factorial              = make([][]int, 100) // factorial[m][n] = (n!)%m
+	inverse                = make([][]int, 100) // inverse[m][n] = (inverse of n!) %m
+	p_adic_factorial       = make([][]int, 100)
+	p_adic_inverse         = make([][]int, 100)
+	n_list           []int = []int{27, 11, 13, 37}
+	r                      = bufio.NewReader(os.Stdin)
+)
 
 func main() {
 	var t int
@@ -49,7 +50,7 @@ func inverse_mod(a, b int) int {
 func select_mod_prime(n, m, p int) int {
 	gFactorial := func(num int) int {
 		if !in(p, factorial) {
-			factorial[p] = []int{1, 1}
+			factorial = append(factorial, []int{1, 1})
 		}
 		for idx := 2; idx <= num; idx++ {
 			factorial[p][idx] = factorial[p][idx-1] * idx % p
@@ -117,7 +118,7 @@ func select_mod_prime_power(n, m, p, q int) int {
 
 	var e0, eq1 int
 	carry_out := func(m_ex, r_ex []int, d int) (int, int) {
-		var has_carry []int
+		has_carry := make([]int, d+1)
 		var prev_carry int
 		for idx := 0; idx < d+1; idx++ {
 			value := m_ex[idx] + r_ex[idx] + prev_carry
@@ -141,7 +142,7 @@ func select_mod_prime_power(n, m, p, q int) int {
 
 	get_p_adic_factorial := func(num int) int {
 		if !in(p, p_adic_factorial) {
-			p_adic_factorial[p] = []int{1, 1}
+			p_adic_factorial = append(p_adic_factorial, []int{1, 1})
 		}
 		begin := len(p_adic_factorial[p])
 		for idx := begin; idx < num+1; idx++ {
@@ -150,6 +151,9 @@ func select_mod_prime_power(n, m, p, q int) int {
 				tmpr = 1
 			} else {
 				tmpr = idx
+			}
+			if idx == -1 || idx == 0 {
+				idx = tmpr
 			}
 			p_adic_factorial[p][idx] = p_adic_factorial[p][idx-1] * tmpr % modu
 		}

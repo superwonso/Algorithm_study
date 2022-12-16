@@ -17,11 +17,15 @@ func main() {
 	for i := 0; i < t; i++ {
 		var n, r1 int
 		fmt.Fscan(r, &n, &r1)
-		a := comb_pe(n, r1, 3, 3)
-		b := comb_pe(n, r1, 11, 1)
-		c := comb_pe(n, r1, 13, 1)
-		d := comb_pe(n, r1, 37, 1)
-		//fmt.Println(a, b, c, d)
+		var a int = comb_pe(n, r1, 3, 3)
+		fmt.Println("a")
+		var b int = comb_pe(n, r1, 11, 1)
+		fmt.Println("b")
+		var c int = comb_pe(n, r1, 13, 1)
+		fmt.Println("c")
+		var d int = comb_pe(n, r1, 37, 1)
+		fmt.Println("d")
+		fmt.Println(a, b, c, d)
 		tmpr := ((((a * 137566) % D) + ((b * 103896) % D) + ((c * 109890) % D) + (d * 77220 % D)) % D)
 		fmt.Println(" ")
 		fmt.Println(tmpr)
@@ -113,8 +117,11 @@ func comb_pe(n, k, p, e int) int {
 	nt, nm := fact_n_pe(n, p, e)
 	kt, km := fact_n_pe(k, p, e)
 	nkt, nkm := fact_n_pe(n-k, p, e)
+	fmt.Println("nt nm kt km nkt nkm", nt, nm, kt, km, nkt, nkm)
 	pe := int(math.Pow(float64(p), float64(e)))
+	fmt.Println("p^e", pe)
 	t := nt - kt - nkt
+	fmt.Println("t", t)
 	if t >= e {
 		return 0
 	}
@@ -124,7 +131,8 @@ func comb_pe(n, k, p, e int) int {
 			break
 		}
 	}
-	return (int(math.Pow(float64(p), float64(t))) * nm * i) % pe
+	fmt.Println("(int(math.Pow(float64(p), float64(t))) * nm * i) % pe", int(math.Pow(float64(p), float64(t)))*nm*i%pe)
+	return int(math.Pow(float64(p), float64(t))) * nm * i % pe
 }
 
 func doo(n, p, pe int, val []int) (int, int) {
@@ -142,16 +150,19 @@ func doo(n, p, pe int, val []int) (int, int) {
 func fact_n_pe(n, p, e int) (int, int) {
 	val := precom(p, e)
 	pe := int(math.Pow(float64(p), float64(e)))
+	return doo(n, p, pe, val)
+}
+
+/*
 	do := func(n int) (int, int) {
 		if n < p {
-			return 0, 0
+			return 0, val[n]
 		}
 		t := n / p
-		nt, nm := doo(t, p, pe, val)
+		nt, nm := do(t) //doo(t, p, pe, val)
 		tp := t + nt
 		kp, rp := divmod(n, pe)
 		m := (((nm * mod_pow(val[pe-1], kp, pe)) % pe) * val[rp]) % pe
 		return tp, m
 	}
-	return do(n)
-}
+*/
