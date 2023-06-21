@@ -21,5 +21,6 @@ func main() {
 		sum += value[i]
 	}
 	new_avg := sum / float64(len(value))
-	fmt.Println(new_avg)
+	fmt.Println(float64(new_avg))
+
 }
