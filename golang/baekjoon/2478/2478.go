@@ -61,7 +61,11 @@ func main() {
 	}
 	fmt.Fprintf(w, "%d %d\n", s+1, e+1)
 	//print sh? sh: N below
-	fmt.Fprintf(w, "%d\n", sh)
+	if sh == 1 {
+		fmt.Fprintf(w, "%d\n", sh)
+	} else {
+		fmt.Fprintf(w, "%d\n", n)
+	}
 	w.Flush()
 }
 
