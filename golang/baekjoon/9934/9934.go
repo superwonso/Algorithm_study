@@ -8,9 +8,13 @@ import (
 )
 
 type Tree struct {
-	le  *Tree
-	ri  *Tree
-	val int
+	node *Node
+}
+
+type Node struct {
+	value int
+	left  *Node
+	right *Node
 }
 
 var r = bufio.NewReader(os.Stdin)
@@ -18,71 +22,88 @@ var w = bufio.NewWriter(os.Stdout)
 
 func main() {
 	var depth int
-	var tr Tree
+	tr := &Tree{}
+
 	fmt.Fscanln(r, &depth)
 	var n int = 1
+
 	for i := 0; i < depth; i++ {
 		n *= 2
 	}
+
 	var arr = make([]int, n-1)
 	for i := 0; i < n-1; i++ {
 		fmt.Fscanf(r, "%d", &arr[i])
 	}
-	tr = *insert(&tr, arr[0])
-	for i := 1; i < n-1; i++ {
-		insert(&tr, arr[i])
+	fmt.Fprint(w, arr, "\n")
+
+	for i := 0; i < n-1; i++ {
+		tr.insert(arr[i])
+		fmt.Fprintln(w, "arr :  arr[i]", arr[i])
+		fmt.Fprintln(w, "tr.node.value: ", tr.node.value)
 	}
-	tr = *make_complete_binary_tree(&tr, depth-1)
+
+	//tr = make_complete_binary_tree(tr, depth)
+
+	// fmt.Fprintln(w, "tr.node.value: ", tr.node.value)
+	// fmt.Fprintln(w, "tr.node.left.value: ", tr.node.left.value)
+
 	for i := 0; i < depth; i++ {
 		for j := 0; j < int(math.Pow(2, float64(i))); j++ {
-			if i == 0 {
-				fmt.Fprintf(w, "%d\n", tr.val)
-			} else {
-				print_tree(&tr, i)
-				fmt.Fprintf(w, " ")
-			}
+			// if i == 0 {
+			// 	fmt.Fprintf(w, "%d", tr.node.value)
+			// } else {
+			// 	fmt.Fprintf(w, "%d ", tr.node.value)
+			// }
+			printNode_in_level(tr.node, i+1)
 		}
 		fmt.Fprintf(w, "\n")
 	}
 	w.Flush()
 }
 
-func insert(t *Tree, v int) *Tree {
-	if t == nil {
-		return &Tree{nil, nil, v}
-	}
-	if v < t.val {
-		t.le = insert(t.le, v)
+func (t *Tree) insert(value int) *Tree {
+
+	if t.node == nil {
+		t.node = &Node{value: value}
 	} else {
-		t.ri = insert(t.ri, v)
+		t.node.insert(value)
 	}
+
 	return t
 }
 
-func make_complete_binary_tree(t *Tree, k int) *Tree {
-	if k == 0 {
-		return t
+func (n *Node) insert(value int) {
+	if n.left == nil {
+		n.left = &Node{value: value}
+	} else {
+		n.left.insert(value)
 	}
-	if t.le != nil {
-		t.le = make_complete_binary_tree(t.le, k-1)
+	if n.right == nil {
+		n.right = &Node{value: value}
+	} else {
+		n.right.insert(value)
 	}
-	if t.ri != nil {
-		t.ri = make_complete_binary_tree(t.ri, k-1)
-	}
-	return t
+	return
 }
 
-// Print tree given level
-// example... 1 6 4 3 5 2 7 -> 3; 6 2; 1 4 5 7;
-func print_tree(t *Tree, k int) {
-	if k == 0 {
-		fmt.Fprintf(w, "%d ", t.val)
+func printNode_in_level(n *Node, level int) {
+	if n == nil {
 		return
 	}
-	if t.le != nil {
-		print_tree(t.le, k-1)
+	if level == 1 {
+		fmt.Fprintf(w, "%d ", n.value)
 	}
-	if t.ri != nil {
-		print_tree(t.ri, k-1)
+	printNode_in_level(n.left, level-1)
+	printNode_in_level(n.right, level-1)
+	return
+}
+
+func make_complete_binary_tree(t *Tree, depth int) *Tree {
+	if depth == 1 {
+		return t
 	}
+	t.node.left = make_complete_binary_tree(t.node.left, depth-1)
+	t.node.right = make_complete_binary_tree(t.node.right, depth-1)
+	return t
 }
